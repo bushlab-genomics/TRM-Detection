@@ -28,13 +28,12 @@ parser.add_argument("-e","--epochs", help="please provide the number of epochs f
 parser.add_argument("-b","--batchsize", help="please provide the batchsize for fitting the MLPU models(default = 32)",type = int, nargs= "?",const = 32, action = "store")
 args = parser.parse_args()
 
-input_file_path  = "Data/"
 out_path =  "pred_results/"
 if not os.path.exists(out_path):
         os.mkdir(out_path)
 
 print("Reading the input files.")
-expr_df  =pd.read_csv(input_file_path + args.expression,header = None)
+expr_df  =pd.read_csv(args.expression,header = None)
 panda_scores_df =pd.read_csv(args.input, sep = "\t")
 panda_scores_t = panda_scores_df.T
 panda_scores_t.insert(0,"hgnc_symbol", list(panda_scores_t.index))
