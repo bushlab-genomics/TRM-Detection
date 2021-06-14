@@ -26,7 +26,7 @@ There are four scripts in the **Code** folder. Below we have provided the detail
 * -e, --epochs: Number of epochs to be used for training the MLPU models(default = 50). 
 * -b, --batchsize: Batchsize of the TG set to be used for training the MLPU models(default = 32). 
 
-**example run: python Code/build_mlpu_models.py -i toy_grn_reg_net.tsv -x toy_pred_expression.csv -r -b -o toy_grn -e 10**
+**example run: python Code/build_mlpu_models.py -i Data/toy_grn_reg_net.tsv -x Data/toy_pred_expression.csv -r -b -o toy_grn -e 10**
 
 2) **get_nid_scores.py**: This script uses the trained MLPU models to detect TRMs and calculate their interaction effects using the NID algorithm. Significant portion of this script is derived from the original NID repo(https://github.com/mtsang/neural-interaction-detection). The output files(format: output prefix + "_" + random iteration + "_model_nid_scores.csv") will be produced in the "pred_results" directory by default. 
 * -o, --output: The output prefix to be used for the files containing NID scores calculated using MLPU models for each random iteration. This prefix must match the output prefix used for running the **build_mlpu_models.py** exactly. 
