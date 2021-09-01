@@ -170,7 +170,7 @@ if args.multiprocess:
     random_states_f = []
     for i in random_file_list:
         k1= i.split("/")
-        k2 = int(k1[len(k1) -1].split("_")[2])
+        k2 = int(k1[len(k1) -1].split("_")[-4])
         random_states_f.append(k2)
     random_states_f = sorted(set(random_states_f))
     tl = list(pool.map(get_h_tf_rankings_model,random_states_f))
@@ -180,7 +180,7 @@ else:
     random_states_f = []
     for i in random_file_list:
         k1= i.split("/")
-        k2 = int(k1[len(k1) -1].split("_")[2])
+        k2 = int(k1[len(k1) -1].split("_")[-4])
         random_states_f.append(k2)
     random_states_f = sorted(set(random_states_f))
     tl = list(map(get_h_tf_rankings_model,random_states_f))
