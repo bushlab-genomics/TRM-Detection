@@ -26,27 +26,42 @@ There are four scripts in the **Code** folder. Below we have provided the detail
 * -e, --epochs: Number of epochs to be used for training the MLPU models(default = 50). 
 * -b, --batchsize: Batchsize of the TG set to be used for training the MLPU models(default = 32). 
 
-**example run: python Code/build_mlpu_models.py -i Data/toy_grn_reg_net.tsv -x Data/toy_pred_expression.csv -r -b -o toy_grn -e 10**
+example run: 
+
+```
+python Code/build_mlpu_models.py -i Data/toy_grn_reg_net.tsv -x Data/toy_pred_expression.csv -r -b -o toy_grn -e 10
+```
 
 2) **get_nid_scores.py**: This script uses the trained MLPU models to detect TRMs and calculate their interaction effects using the NID algorithm. Significant portion of this script is derived from the original NID repo(https://github.com/mtsang/neural-interaction-detection). The output files(format: output prefix + "_" + random iteration + "_model_nid_scores.csv") will be produced in the "pred_results" directory by default. 
 * -o, --output: The output prefix to be used for the files containing NID scores calculated using MLPU models for each random iteration. This prefix must match the output prefix used for running the **build_mlpu_models.py** exactly. 
 * -m, --multiprocess: Select this flag in order to run the script as a parallel process. 
 * -n, --cpu: Use this option along with the -m flag to specify the number of cores/cpus to be used for parallel processing.
 
-**example run: python Code/get_nid_scores.py -o toy_grn**
+example run: 
+
+```
+python Code/get_nid_scores.py -o toy_grn
+```
 
 3) **postprocess_nid_scores.py**: This script postprocesses the file containing NID scores calculated using the **get_nid_scores.py**. Specifically, it merges the NID scores from all the random iterations and computes average NID score for each TRM followed by Log2 normalization of the NID scores. It also uses a threshold, derived from the median Log2NID scores of the TRM set discovered in the paper to filter out the insignificant TRMs. The final file containing Log2NID scores(format: output prefix + "_nid_scores_postprocessed.csv") will be produced in the "pred_results" directory by default. 
 * -o, --output: The output prefix used in the previous scripts, which will be also present in the final postprocessed file. 
 * -t, --threshold: The threshold to be used for Log2 NID scores to filter out TRMs not significantly impacting TG expression(default= 2.25 derived from the median Log2NID scores of the TRMs discovered in the paper). 
 
-**example run: python Code/postprocess_nid_scores.py -o toy_grn**
+example run: 
+
+```
+python Code/postprocess_nid_scores.py -o toy_grn
+```
 
 4) **get_main_effects.py**: This script computes main effects of individual TFs present in the input feature matrix from the univariate MLPs of the MLPU models. The output file(format: output prefix + "_univariate_main_effects.csv")
 * -o, --output: The output prefix used in the previous scripts, which will be also present in the final file containing main effects.
 * -m, --multiprocess: Select this flag in order to run the script as a parallel process. 
 * -n, --cpu: Use this option along with the -m flag to specify the number of cores/cpus to be used for parallel processing.
 
-**example run: python Code/get_main_effects.py -o toy_grn**
+example run: 
 
+```
+python Code/get_main_effects.py -o toy_grn
+```
 
 
